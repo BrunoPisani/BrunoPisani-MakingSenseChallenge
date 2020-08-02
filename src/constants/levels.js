@@ -22,7 +22,7 @@ export const levels = [
             [' ',' ',' ','W',' '],
             ['W','W',' ','W','E'],
         ],
-        moves: 10
+        moves: 12
     },
     { 
         board: [

@@ -36,9 +36,10 @@ const Board = ({ matrix, cellDimensions, width, height, playerCell }) => {
                                 const color = paintRoom(col);
                                 const id = `${rowIndex},${colIndex}`;
                                 const player = (playerCell.col === colIndex) && (playerCell.row === rowIndex);
+                                const exit = col === 'E';
                                 
                                 return (
-                                    <Cell color={color} dimensions={cellDimensions} hasPlayer={player} key={id} />
+                                    <Cell color={color} dimensions={cellDimensions} hasPlayer={player} exit={exit} key={id} />
                                 )
                             })
                             }

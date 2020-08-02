@@ -10,7 +10,7 @@ test('reducer(undefined, {type: MOVE, targetDirection: DIAGONAL }) returned stat
     expect(reducer(undefined,{type: MOVE, direction: 'DIAGONAL' })).toEqual(initialState);
 });
 
-test('reducer(undefined, {type: MOVE, targetDirection: DOWN }) returned state should be equal to the mocked previousState (cannot move as it is blocked by gameWon)', () => {
+test('reducer(previousState, {type: MOVE, targetDirection: DOWN }) returned state should be equal to the mocked previousState (cannot move as it is blocked by gameWon)', () => {
     const previousState = {
         levels: initialState.levels,
         level: 1,
@@ -26,7 +26,7 @@ test('reducer(undefined, {type: MOVE, targetDirection: DOWN }) returned state sh
     expect(reducer(undefined,{type: MOVE, direction: DOWN })).toEqual(initialState);
 });
 
-test('reducer(state, {type: MOVE, targetDirection: DOWN }) returned state should be equal to the mocked finalState', () => {
+test('reducer(previousState, {type: MOVE, targetDirection: DOWN }) returned state should be equal to the mocked finalState', () => {
     const previousState = {
         levels: initialState.levels,
         level: 1,
@@ -50,7 +50,7 @@ test('reducer(undefined, {type: MOVE, targetDirection: UP }) returned state shou
     expect(reducer(undefined,{type: MOVE, direction: UP })).toEqual(initialState);
 });
 
-test('reducer(undefined, {type: MOVE, targetDirection: UP }) returned state should be equal to the mocked finalState', () => {
+test('reducer(previousState, {type: MOVE, targetDirection: UP }) returned state should be equal to the mocked finalState', () => {
     const previousState = {
         levels: initialState.levels,
         level: 1,
@@ -82,7 +82,7 @@ test('reducer(undefined, {type: MOVE, targetDirection: RIGHT }) returned state s
     expect(reducer(undefined,{type: MOVE, direction: RIGHT })).toEqual(finalState);
 });
 
-test('reducer(undefined, {type: MOVE, targetDirection: RIGHT }) returned state should be equal to the mocked previousState (cannot move to targetDirection)', () => {
+test('reducer(previousState, {type: MOVE, targetDirection: RIGHT }) returned state should be equal to the mocked previousState (cannot move to targetDirection)', () => {
     const previousState = {
         levels: initialState.levels,
         level: 0,
@@ -98,7 +98,7 @@ test('reducer(undefined, {type: MOVE, targetDirection: LEFT }) returned state sh
     expect(reducer(undefined,{type: MOVE, direction: LEFT })).toEqual(initialState);
 });
 
-test('reducer(undefined, {type: MOVE, targetDirection: LEFT }) returned state should be equal to the mocked finalState', () => {
+test('reducer(previousState, {type: MOVE, targetDirection: LEFT }) returned state should be equal to the mocked finalState', () => {
     const previousState = {
         levels: initialState.levels,
         level: 0,
@@ -130,6 +130,14 @@ test('reducer(undefined, {type: GO_TO_LEVEL, targetLevel: 1 }) returned state sh
     expect(reducer(undefined,{type: GO_TO_LEVEL, targetLevel: 1 })).toEqual(finalState);
 });
 
-test('reducer(undefined, {type: GO_TO_LEVEL, targetLevel: 3 }) returned state should be equal to the previousState (target level isnot valid)', () => {
-    expect(reducer(undefined,{type: GO_TO_LEVEL, targetLevel: 3 })).toEqual(initialState);
+test('reducer(previousState, {type: GO_TO_LEVEL, targetLevel: 3 }) returned state should be equal to the previousState (target level isnot valid)', () => {
+    const previousState = {
+        levels: initialState.levels,
+        level: 1,
+        playerCell: { col: 0, row: 0 },
+        movesLeft: initialState.levels[1].moves,
+        gameWon: false,
+        gameLost: false
+    };
+    expect(reducer(previousState,{type: GO_TO_LEVEL, targetLevel: 3 })).toEqual(initialState);
 });

@@ -69,13 +69,20 @@ export const reducer = (state = initialState, action = {type: ''}) => {
         case GO_TO_LEVEL: {
             if(state.levels[targetLevel]) {
                 const level = targetLevel;
-                const playerCell = findStart(state.levels[targetLevel].board);
-                const movesLeft = state.levels[targetLevel].moves;
+                const playerCell = findStart(state.levels[level].board);
+                const movesLeft = state.levels[level].moves;
                 const gameWon = false;
                 const gameLost = false;
                 return {...state, level, playerCell, movesLeft, gameWon, gameLost};
             }
-            return {...state}
+            else {
+                const level = 0;
+                const playerCell = findStart(state.levels[level].board);
+                const movesLeft = state.levels[level].moves;
+                const gameWon = false;
+                const gameLost = false;
+                return {...state, level, playerCell, movesLeft, gameWon, gameLost};
+            }
         }
         default:
             return {...state};

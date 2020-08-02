@@ -44,6 +44,15 @@ const Game = ({levels, level, playerCell, movesLeft, gameLost, gameWon, move, go
         }
     }, [gameWon, goToLevel, level]);
 
+    useEffect(() => {
+        if (gameLost) {
+            setTimeout(()=>{
+                goToLevel(0);
+            }, 2000);
+            return;
+        }
+    }, [gameLost, goToLevel]);
+
     const { border, height, width } = cellDimensions;
     const matrix = levels[level].board;
     const boardWidth = (width + (border * 2)) * matrix[0].length;
